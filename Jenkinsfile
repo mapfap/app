@@ -1,7 +1,7 @@
 node {
 
     def remote = [:]
-        remote.name = 'host'
+        remote.name = '172.17.0.1'
         remote.host = 'localhost'
         remote.allowAnyHosts = true
     
