@@ -18,6 +18,8 @@ node {
             def tmpFolder = "/var/tmp/${env.BUILD_NUMBER}/"
             sshCommand remote: remote, command: "mkdir -p ${tmpFolder}"
 
+            sh 'ls -la'
+
             sshPut remote: remote, from: 'index.js', into: tmpFolder
             sshPut remote: remote, from: 'package.json', into: tmpFolder
             sshPut remote: remote, from: 'package-lock.json', into: tmpFolder
