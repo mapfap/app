@@ -19,19 +19,17 @@ node {
             remote.user = sshUser
             remote.identityFile = identity
 
-            def tmpFolder = "/var/tmp/${env.BUILD_NUMBER}/"
-            sshCommand remote: remote, command: "mkdir -p ${tmpFolder}"
+            def buildDir = "/var/tmp/${env.JOB_NAME}-${env.BUILD_NUMBER}/"
+            sshCommand remote: remote, command: "mkdir -p ${buildDir}"
 
             sh 'ls -la'
 
-            sshPut remote: remote, from: 'index.js', into: tmpFolder
-            sshPut remote: remote, from: 'package.json', into: tmpFolder
-            sshPut remote: remote, from: 'package-lock.json', into: tmpFolder
-            sshPut remote: remote, from: 'Dockerfile', into: tmpFolder
+            sshPut remote: remote, from: 'index.js', into: buildDir
+            sshPut remote: remote, from: 'package.json', into: buildDir
+            sshPut remote: remote, from: 'package-lock.json', into: buildDir
+            sshPut remote: remote, from: 'Dockerfile', into: buildDir
 
-            writeFile file: 'deploy.sh', text: 'docker build . -t app:latest'
-            sshScript remote: remote, script: 'deploy.sh'
-
+            sshCommand remote: remote, command: "docker build ${buildDir} -t app:latest"
         }
     }
 
