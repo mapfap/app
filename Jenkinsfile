@@ -1,8 +1,8 @@
 node {
 
     def remote = [:]
-        remote.name = '172.17.0.1'
-        remote.host = 'localhost'
+        remote.name = 'host'
+        remote.host = '172.17.0.1'
         remote.allowAnyHosts = true
     
     stage('Remote SSH') {
