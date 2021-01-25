@@ -20,7 +20,7 @@ node {
             remote.identityFile = identity
 
             def tmpFolder = '/var/tmp/${env.BUILD_NUMBER}/'
-            sshCommand remote: remote, command: 'mkdir -p ${tmpFolder}'
+            sshCommand remote: remote, command: "mkdir -p ${tmpFolder}"
 
             sh 'ls -la'
 
