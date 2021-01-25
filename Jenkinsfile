@@ -15,7 +15,7 @@ node {
             remote.user = sshUser
             remote.identityFile = identity
 
-            writeFile file: 'deploy.sh', text: 'touch hello.txt'
+            writeFile file: 'deploy.sh', text: 'docker build . -t app:latest'
             sshScript remote: remote, script: "deploy.sh"
         }
     }
