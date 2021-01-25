@@ -15,7 +15,8 @@ node {
             remote.user = sshUser
             remote.identityFile = identity
 
-            sshScript remote: remote, script: "touch hello.txt"
+            writeFile file: 'deploy.sh', text: 'touch hello.txt'
+            sshScript remote: remote, script: "deploy.sh"
         }
     }
 
