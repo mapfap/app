@@ -1,9 +1,10 @@
 node {
 
-	def commitHash = "$(git rev-parse HEAD | cut -c1-7})"
+	def commitHash
 
     stage('Clone') {
         checkout scm
+        commitHash = sh(script: 'git rev-parse HEAD | cut -c1-7', returnStdout: true).trim()
     }
     
     stage('Deploy') {
