@@ -5,7 +5,7 @@ node {
     }
     
     stage('Deploy') {
-      sh "docker build . -t app:${env.GIT_COMMIT}"
+      sh "docker build . -t app:latest app:${env.GIT_COMMIT}"
     }
 
 }
