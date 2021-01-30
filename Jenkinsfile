@@ -12,7 +12,7 @@ node {
     }
 
     stage('Deploy') {
-      sh "docker stack deploy -c app-stack.yml"
+      sh "docker stack deploy -c app-stack.yml app"
     }
     
 }
