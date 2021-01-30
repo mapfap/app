@@ -7,8 +7,12 @@ node {
         commitHash = sh(script: 'git rev-parse HEAD | cut -c1-7', returnStdout: true).trim()
     }
     
-    stage('Deploy') {
-      sh "docker build . -t app:latest -t app:${commitHash}"
+    stage('Build') {
+      sh "docker build . -t app:latest"
     }
 
+    stage('Deploy') {
+      sh "docker stack deploy -c app-stack.yml"
+    }
+    
 }
